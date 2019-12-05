@@ -10,8 +10,8 @@ const AwaitingPromise = require('./AwaitingPromise')
 
 const testWith = async asyncFn => async () => {
   const db = await asyncFn({
-    host: process.env.MONGODB_HOST || 'localhost',
-    port: process.env.MONGODB_PORT || m.mongoConnect.defaultPort
+    host: process.env.MONGO_TEST_SUPPORT_MONGODB_HOST || 'localhost',
+    port: process.env.MONGO_TEST_SUPPORT_MONGODB_PORT || m.mongoConnect.defaultPort
   })
   expect(db).to.be.ok()
 }

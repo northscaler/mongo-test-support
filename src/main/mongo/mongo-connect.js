@@ -10,12 +10,13 @@ const mongoUrl = require('./mongo-url')
 let connection
 
 const fn = async ({
-  protocol,
-  host,
-  port,
-  dbName,
+  protocol = 'mongodb://',
+  host = fn.defaultContainerName,
+  port = fn.defaultPort,
+  dbName = 'testdb',
   opts = {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   }
 } = {}) => {
   if (connection) return connection
