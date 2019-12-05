@@ -1,0 +1,115 @@
+{
+  "name": "@northscaler/mongo-test-support",
+  "version": "1.0.0-pre.0",
+  "description": "Mongo Node.js Development Test Support Library",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/northscaler/protected/mongo-test-support.git"
+  },
+  "keywords": [
+    "mongo",
+    "mongoose"
+  ],
+  "license": "",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "build": "npm install && npm test",
+    "transpile": "run-s transpile-main transpile-test",
+    "transpile-main": "babel --delete-dir-on-start --verbose --out-dir lib/main --copy-files src/main",
+    "transpile-test": "babel --delete-dir-on-start --verbose --out-dir lib/test --copy-files src/test",
+    "reset-coverage": "rimraf .nyc_output coverage",
+    "preunit-integration": "run-s reset-coverage",
+    "unit-integration": "nyc --check-coverage -x 'lib/test' --exclude-after-remap false mocha 'lib/test/unit/**/*.spec.js' 'lib/test/integration/**/*.spec.js'",
+    "postunit-integration": "run-s report",
+    "preintegration": "run-s reset-coverage",
+    "integration": "nyc --check-coverage -x 'lib/test' --exclude-after-remap false mocha 'lib/test/integration/**/*.spec.js'",
+    "postintegration": "run-s report",
+    "i": "mocha 'src/test/integration/**/*.spec.js' | npx bunyan",
+    "preunit": "run-s reset-coverage",
+    "unit": "nyc --check-coverage -x 'lib/test' --exclude-after-remap false mocha 'lib/test/unit/**/*.spec.js'",
+    "postunit": "run-s report",
+    "u": "mocha 'src/test/unit/**/*.spec.js' | npx bunyan",
+    "test": "run-s transpile unit-integration lint",
+    "report": "nyc report --reporter=html",
+    "cov": "open coverage/index.html",
+    "lint": "standard --verbose 'src/**/*.js'",
+    "format": "standard --fix 'src/**/*.js'",
+    "make-distribution": "run-s transpile finalize-distribution",
+    "finalize-distribution": "copyfiles --verbose package.json package-lock.json README.md LICENSE lib/main",
+    "prelink": "run-s make-distribution",
+    "link": "mkdir -p lib/main && cd lib/main && npm link; cd ../..",
+    "unlink": "mkdir -p lib/main && cd lib/main && npm unlink; cd ../.."
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "dependencies": {
+    "@babel/polyfill": "7.7.0",
+    "@northscaler/error-support": "3.0.1",
+    "fs-extra": "8.1.0",
+    "lodash": "4.17.15",
+    "mongodb": "3.3.5",
+    "mongoose": "5.7.13",
+    "mysql": "2.17.1",
+    "uuid": "3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.7.4",
+    "@babel/core": "7.7.4",
+    "@babel/plugin-proposal-class-properties": "7.7.4",
+    "@babel/plugin-proposal-decorators": "7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "7.7.4",
+    "@babel/plugin-proposal-throw-expressions": "7.7.4",
+    "@babel/preset-env": "7.7.4",
+    "@babel/register": "7.7.4",
+    "acorn": "7.1.0",
+    "babel-eslint": "10.0.3",
+    "chai": "4.2.0",
+    "copyfiles": "2.1.1",
+    "dirty-chai": "2.0.1",
+    "mocha": "6.2.2",
+    "npm-run-all": "4.1.5",
+    "nyc": "14.1.1",
+    "standard": "14.3.1"
+  },
+  "babel": {
+    "sourceMaps": "inline",
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": true
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-optional-chaining",
+        {
+          "loose": false
+        }
+      ],
+      [
+        "@babel/plugin-proposal-throw-expressions"
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "mocha": {
+    "colors": true,
+    "require": "@babel/register",
+    "exit": true
+  }
+}
