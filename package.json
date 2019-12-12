@@ -1,5 +1,5 @@
 {
-  "name": "@northscaler/mongo-test-support",
+  "name": "@northscaler-protected/mongo-test-support",
   "version": "1.0.0-pre.4",
   "description": "Mongo Node.js Development Test Support Library",
   "repository": {
