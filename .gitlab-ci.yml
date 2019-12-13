@@ -18,13 +18,12 @@ publish:
   stage: publish
   image: node:8-alpine
 
-  script:
-    - # HACK see https://gitlab.com/gitlab-org/gitlab/issues/55344
+  script: # HACK see https://gitlab.com/gitlab-org/gitlab/issues/55344
     - docker run -d -p 4873:4873 -v $PWD/.verdaccio:/v verdaccio/verdaccio /opt/verdaccio/bin/verdaccio -c /v/config.yml
     - npm install --registry http://localhost:4873
     - *authenticate-to-npmjs
     - npm run make-distribution
     - cd lib/main
-    - # TODO: npm publish --access restricted
+    # TODO: npm publish --access restricted
   only:
     - /^([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(-(pre|rc)\.[0-9]{1,})?)$/
