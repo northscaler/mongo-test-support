@@ -1,6 +1,6 @@
 .authenticate-to-npmjs:
   - &authenticate-to-npmjs |
-    echo "$NPM_SCOPE-protected:registry=https://$NPM_REGISTRY_HOST_PATH" >> ~/.npmrc
+    echo "$NPM_SCOPE:registry=https://$NPM_REGISTRY_HOST_PATH" >> ~/.npmrc
     echo "//$NPM_REGISTRY_HOST_PATH:_authToken=$NPM_WRITE_TOKEN" >> ~/.npmrc
     echo "//$NPM_PROJECT_HOST_PATH_PREFIX$CI_PROJECT_ID$NPM_PROJECT_HOST_PATH_SUFFIX:_authToken=$NPM_WRITE_TOKEN" >> ~/.npmrc
 
@@ -17,14 +17,14 @@ build:
 publish:
   stage: publish
   image: node:8-alpine
-  services:
+  services: # HACK see https://gitlab.com/gitlab-org/gitlab/issues/55344
     - name: verdaccio/verdaccio
       alias: verdaccio
-  script: # HACK see https://gitlab.com/gitlab-org/gitlab/issues/55344
-    - npm install --registry http://verdaccio:4873
+  script:
+    - npm install --registry http://verdaccio:4873 # HACK
     - *authenticate-to-npmjs
     - npm run make-distribution
     - cd lib/main
-    # TODO: npm publish --access restricted
+    - npm publish --access restricted
   only:
     - /^([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(-(pre|rc)\.[0-9]{1,})?)$/
