@@ -17,10 +17,11 @@ build:
 publish:
   stage: publish
   image: node:8-alpine
-
+  services:
+    - name: verdaccio/verdaccio
+      alias: verdaccio
   script: # HACK see https://gitlab.com/gitlab-org/gitlab/issues/55344
-    - docker run -d -p 4873:4873 -v $PWD/.verdaccio:/v verdaccio/verdaccio /opt/verdaccio/bin/verdaccio -c /v/config.yml
-    - npm install --registry http://localhost:4873
+    - npm install --registry http://verdaccio:4873
     - *authenticate-to-npmjs
     - npm run make-distribution
     - cd lib/main
