@@ -10,7 +10,7 @@ module.exports = ({
   protocol = 'mongodb://',
   host = 'localhost',
   port = DEFAULT_PORT,
-  dbName = 'ableto-local'
+  dbName = 'mongotest-local'
 } = {}) => {
   protocol = protocol || throw new MissingRequiredArgumentError({ msg: 'protocol' })
   if (!protocol.endsWith('://')) protocol = `${protocol}://`
