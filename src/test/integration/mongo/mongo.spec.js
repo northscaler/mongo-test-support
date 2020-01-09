@@ -6,7 +6,6 @@ chai.use(require('dirty-chai'))
 const expect = chai.expect
 
 const m = require('../../../main/mongo')
-const AwaitingPromise = require('./AwaitingPromise')
 
 const testWith = async asyncFn => async () => {
   const db = await asyncFn({
@@ -20,14 +19,14 @@ describe('integration tests of mongo', function () {
   describe('mongo-connect', function () {
     it('should work', async function () {
       this.timeout(5000)
-      return AwaitingPromise(await testWith(m.mongoConnect))
+      return testWith(m.mongoConnect)
     })
   })
 
   describe('mongoose-connect', function () {
     it('should work', async function () {
       this.timeout(5000)
-      return AwaitingPromise(await testWith(m.mongooseConnect))
+      return testWith(m.mongooseConnect)
     })
   })
 })
