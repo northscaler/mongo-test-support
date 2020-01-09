@@ -21,7 +21,7 @@
     "transpile-test": "babel --delete-dir-on-start --verbose --out-dir lib/test --copy-files src/test",
     "reset-coverage": "rimraf .nyc_output coverage",
     "preunit-integration": "run-s reset-coverage",
-    "unit-integration": "nyc --check-coverage --lines 65 -x 'lib/test' --exclude-after-remap false mocha 'lib/test/unit/**/*.spec.js' 'lib/test/integration/**/*.spec.js'",
+    "unit-integration": "nyc --check-coverage --lines 40 -x 'lib/test' --exclude-after-remap false mocha 'lib/test/unit/**/*.spec.js' 'lib/test/integration/**/*.spec.js'",
     "postunit-integration": "run-s report",
     "preintegration": "run-s reset-coverage",
     "integration": "nyc --check-coverage --lines 65 -x 'lib/test' --exclude-after-remap false mocha 'lib/test/integration/**/*.spec.js'",

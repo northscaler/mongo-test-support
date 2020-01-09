@@ -4,7 +4,7 @@ const fs = require('fs')
 const _ = require('lodash')
 const MongoClient = require('mongodb').MongoClient
 
-const startMongo = require('./start-mongodb')
+const startMongo = require('./start-mongo')
 const mongoUrl = require('./mongo-url')
 
 let connection

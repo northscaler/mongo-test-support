@@ -9,8 +9,8 @@ const m = require('../../../main/mongo')
 
 const testWith = async asyncFn => async () => {
   const db = await asyncFn({
-    host: process.env.MONGO_TEST_SUPPORT_MONGODB_HOST || 'localhost',
-    port: process.env.MONGO_TEST_SUPPORT_MONGODB_PORT || m.mongoConnect.defaultPort
+    host: process.env.MONGO_TEST_SUPPORT_MONGO_HOST || 'localhost',
+    port: process.env.MONGO_TEST_SUPPORT_MONGO_PORT || m.mongoConnect.defaultPort
   })
   expect(db).to.be.ok()
 }
