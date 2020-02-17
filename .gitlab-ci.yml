@@ -1,8 +1,17 @@
 .authenticate-to-npmjs:
   - &authenticate-to-npmjs |
-    echo "$NPM_SCOPE:registry=https://$NPM_REGISTRY_HOST_PATH" >> ~/.npmrc
-    echo "//$NPM_REGISTRY_HOST_PATH:_authToken=$NPM_WRITE_TOKEN" >> ~/.npmrc
-    echo "//$NPM_PROJECT_HOST_PATH_PREFIX$CI_PROJECT_ID$NPM_PROJECT_HOST_PATH_SUFFIX:_authToken=$NPM_WRITE_TOKEN" >> ~/.npmrc
+    echo "$NPM_SCOPE:registry=https://$NPM_REGISTRY_HOST/" >> ~/.npmrc
+    echo "//$NPM_REGISTRY_HOST/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+
+image: node:8.6.0-alpine
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - node --version
+  - npm --version
 
 stages:
   - build
@@ -10,22 +19,18 @@ stages:
 
 build:
   stage: build
-  image: node:8-alpine
   script:
     - npm run build
 
 publish:
   stage: publish
-  image: node:8-alpine
-  services: # HACK see https://gitlab.com/gitlab-org/gitlab/issues/55344
-    - name: verdaccio/verdaccio
-      alias: verdaccio
-    - mongo
   script:
-    - npm install --registry http://verdaccio:4873 # HACK
     - *authenticate-to-npmjs
     - npm run make-distribution
     - cd lib/main
-    - npm publish --access restricted
+    - npm shrinkwrap
+    - export RM_TMP_TAG=cicd-$(date +%s)
+    - npm publish --access public --tag $RM_TMP_TAG
+    - ../../tag-nodejs
   only:
-    - /^([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(-(pre|rc)\.[0-9]{1,})?)$/
+    - /^\d+\.\d+\.\d+(\-[^\.]+\.\d+)?$/
