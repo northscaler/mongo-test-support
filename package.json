@@ -10,7 +10,7 @@
     "mongo",
     "mongoose"
   ],
-  "license": "",
+  "license": "MIT",
   "engines": {
     "node": ">=8.6.0"
   },

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 THIS_DIR="$(cd "$(dirname "$0")"; pwd)"
 

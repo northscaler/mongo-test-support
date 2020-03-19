@@ -13,7 +13,7 @@ const fn = async ({
   protocol = 'mongodb://',
   host = fn.defaultContainerName,
   port = fn.defaultPort,
-  dbName = 'testdb',
+  dbName = 'mongo-test-support',
   opts = {
     useNewUrlParser: true,
     useUnifiedTopology: true
