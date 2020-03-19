@@ -9,7 +9,7 @@ const mongoUrl = require('../../../main/mongo/mongo-url')
 
 describe('unit tests of mongo-url', function () {
   it('should work', function () {
-    expect(mongoUrl()).to.equal('mongodb://localhost:39120/mongotest-local')
+    expect(mongoUrl()).to.equal('mongodb://localhost:37017/mongotest-local')
 
     expect(mongoUrl({ protocol: 'mongodb+srv://' })).to.equal('mongodb+srv://localhost/mongotest-local')
 
