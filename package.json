@@ -4,7 +4,7 @@
   "description": "Mongo Node.js Development Test Support Library",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/northscaler/protected/mongo-test-support.git"
+    "url": "https://gitlab.com/northscaler-public/mongo-test-support.git"
   },
   "keywords": [
     "mongo",
@@ -43,8 +43,7 @@
     "unlink": "mkdirp lib/main && cd lib/main && npm unlink; cd ../.."
   },
   "publishConfig": {
-    "access": "restricted",
-    "@northscaler:registry": "https://gitlab.com/api/v4/projects/15709302/packages/npm/"
+    "access": "public"
   },
   "dependencies": {
     "@babel/polyfill": "7.7.0",
