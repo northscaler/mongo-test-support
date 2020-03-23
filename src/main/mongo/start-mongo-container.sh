@@ -15,5 +15,7 @@ if [ $? -eq 1 ] || [ "$RUNNING" == "false" ]; then
   # make sure it's gone
   docker ps -a | grep "$CONTAINER" | awk '{ print $1}' | xargs docker rm --force
 
-  docker run --name "$CONTAINER" -p $PORT:27017 -d mongo
+  CMD="docker run --name $CONTAINER -p $PORT:27017 -d mongo"
+  echo "$CMD"
+  $CMD
 fi
