@@ -2,7 +2,7 @@
 
 THIS_DIR="$(cd "$(dirname "$0")"; pwd)"
 
-if [ -n "$CI_COMMIT_SHA" ]; then # we're in CI pipeline
+if { [ -n "$GITHUB_SHA" ] || [ -n "$CI_COMMIT_SHA" ]; }; then # we're in CI pipeline
   echo 'in pipeline - mongo is started'
 else
   CONTAINER=${1:-$MONGO_TEST_SUPPORT_MONGO_HOST}
