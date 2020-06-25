@@ -25,7 +25,8 @@ const fn = async ({
 } = {}) => {
   if (connection) return connection
 
-  await startMongo()
+  const scriptArgs = [host, port]
+  await startMongo({ scriptArgs })
 
   opts = _.cloneDeep(opts)
 
