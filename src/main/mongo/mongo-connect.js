@@ -21,7 +21,8 @@ const fn = async ({
 } = {}) => {
   if (connection) return connection
 
-  await startMongo()
+  const scriptArgs = [host, port]
+  await startMongo({ scriptArgs })
 
   const url = mongoUrl({ protocol, host, port, dbName })
 
