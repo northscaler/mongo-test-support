@@ -14,7 +14,7 @@ if [ $? -eq 1 ] || [ "$RUNNING" == "false" ]; then
   echo "container '$CONTAINER' does not exist or is stopped - recreating"
   # make sure it's gone
   CONTAINER_ID=$(docker ps -a | grep "$CONTAINER" | awk '{ print $1}')
-  if [ $? ]; then
+  if [[ -n "${CONTAINER_ID}" ]]; then
     echo "Force removing container with id $CONTAINER_ID"
     docker rm --force "$CONTAINER_ID"
   else
