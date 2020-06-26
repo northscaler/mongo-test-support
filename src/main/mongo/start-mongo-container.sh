@@ -13,8 +13,14 @@ RUNNING=$(docker inspect --format="{{ .State.Running }}" "$CONTAINER" 2> /dev/nu
 if [ $? -eq 1 ] || [ "$RUNNING" == "false" ]; then
   echo "container '$CONTAINER' does not exist or is stopped - recreating"
   # make sure it's gone
-  docker ps -a | grep "$CONTAINER" | awk '{ print $1}' | xargs docker rm --force
-
+  CONTAINER_ID=$(docker ps -a | grep "$CONTAINER" | awk '{ print $1}')
+  if [ $? ]; then
+    echo "Force removing container with id $CONTAINER_ID"
+    docker rm --force "$CONTAINER_ID"
+  else
+    echo "No mongo container exists"
+  fi
+  
   CMD="docker run --name $CONTAINER -p $PORT:27017 -d mongo"
   echo "$CMD"
   $CMD
