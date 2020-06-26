@@ -11,9 +11,10 @@ let connection
 
 const fn = async ({
   protocol = 'mongodb://',
-  host = fn.defaultContainerName,
+  host = 'localhost',
   port = fn.defaultPort,
-  dbName = 'mongo-test-support',
+  dbName = 'testdb',
+  containerName = fn.defaultContainerName,
   opts = {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -21,7 +22,7 @@ const fn = async ({
 } = {}) => {
   if (connection) return connection
 
-  const scriptArgs = [host, port]
+  const scriptArgs = [containerName, port]
   await startMongo({ scriptArgs })
 
   const url = mongoUrl({ protocol, host, port, dbName })

@@ -11,9 +11,10 @@ let connection
 
 const fn = async ({
   protocol = 'mongodb://',
-  host = fn.defaultContainerName,
+  host = 'localhost',
   port = fn.defaultPort,
   dbName = 'testdb',
+  containerName = fn.defaultContainerName,
   opts = {
     autoIndex: true,
     bufferCommands: false,
@@ -25,7 +26,7 @@ const fn = async ({
 } = {}) => {
   if (connection) return connection
 
-  const scriptArgs = [host, port]
+  const scriptArgs = [containerName, port]
   await startMongo({ scriptArgs })
 
   opts = _.cloneDeep(opts)
