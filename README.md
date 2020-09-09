@@ -13,11 +13,26 @@ Your application must install its desired versions of [`mongodb`](https://www.np
 
 Usage:
 ```javascript
-const mongoConnect = require('@northscaler/mongo-test-support')
+const { mongoConnect } = require('@northscaler/mongo-test-support')
 
-const client = await mongoConnect()
+const db = await mongoConnect()
 
-// now you can client.execute() CQL statements
+// now you can do db.createCollection(), etc
+// db.client is mongo client
+```
+
+Usage to work in both local environment & CI pipeline:
+```javascript
+const { mongoConnect } = require('@northscaler/mongo-test-support')
+const db = await mongoConnect(process.env.CI_COMMIT_SHA ? { host: 'mongo', port: 27017 } : undefined)
+```
+
+You can also drop collections:
+```javascript
+const { dropCollections } = require('@northscaler/mongo-test-support')
+await dropCollections({db}) // drops all collections
+await dropCollections({db, names: ['foos', 'bars']}) // drops named collections
+await dropCollections({db, names: []}) // no collections dropped
 ```
 
 ## Configuration
@@ -26,7 +41,7 @@ The default configuration is pretty conventional, with the sole exception of the
 Instead of `27017`, which might already be in use on developers' machines when they run integration tests, the default configuration uses `37017`.
 It is a `TODO` to search for an available port.
 
->NOTE: This module detects when it's running in a CI/CD pipeline by seeing if the environment variable `CI` is of nonzero length.
+>NOTE: This module detects when it's running in a CI/CD pipeline by seeing if the environment variable `CI_COMMIT_SHA` or `GITHUB_SHA` is of nonzero length.
 
 ### Environment variables
 
