@@ -2,7 +2,8 @@
 
 const fs = require('fs')
 const _ = require('lodash')
-const MongoClient = require('mongodb').MongoClient
+const mongodb = () => require('mongodb')
+const MongoClient = () => mongodb().MongoClient
 
 const startMongo = require('./start-mongo')
 const mongoUrl = require('./mongo-url')
@@ -32,7 +33,7 @@ const fn = async ({
     try { delete opts.auth } catch (e) { /* gulp */ }
   }
 
-  const mongoClient = await MongoClient.connect(url, opts)
+  const mongoClient = await MongoClient().connect(url, opts)
   connection = await mongoClient.db()
   connection.client = mongoClient
 

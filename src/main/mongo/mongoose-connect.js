@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const _ = require('lodash')
-const mongoose = require('mongoose')
+const mongoose = () => require('mongoose')
 
 const startMongo = require('./start-mongo')
 const mongoUrl = require('./mongo-url')
@@ -34,7 +34,7 @@ const fn = async ({
   const url = mongoUrl({ protocol, host, port, dbName })
 
   return new Promise((resolve, reject) => {
-    connection = mongoose.createConnection(url, opts)
+    connection = mongoose().createConnection(url, opts)
     connection.once('error', reject)
     connection.once('connected', () => resolve(connection))
   })
