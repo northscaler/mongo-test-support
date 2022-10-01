@@ -1,5 +1,5 @@
 {
-  "name": "@northscaler/mongo-test-support",
+  "name": "@ballistagroup/mongo-test-support",
   "version": "1.2.0-pre.1",
   "description": "Mongo Node.js Development Test Support Library",
   "repository": {
@@ -51,13 +51,13 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.10.4",
-    "@northscaler/error-support": "3.4.0",
+    "@ballistagroup/error-support": "3.6.0",
     "fs-extra": "9.0.1",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "uuid": "8.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.5",
+    "@babel/cli": "7.19.3",
     "@babel/core": "7.11.4",
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@babel/plugin-proposal-decorators": "7.10.5",
@@ -70,10 +70,10 @@
     "chai": "4.2.0",
     "copyfiles": "2.3.0",
     "dirty-chai": "2.0.1",
-    "jsdoc": "3.6.5",
+    "jsdoc": "3.6.11",
     "mocha": "7.2.0",
     "mongodb": "3.6.0",
-    "mongoose": "5.10.0",
+    "mongoose": "5.13.15",
     "npm-run-all": "4.1.5",
     "nyc": "15.1.0",
     "standard": "14.3.4"
