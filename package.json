@@ -1,6 +1,6 @@
 {
   "name": "@ballistagroup/mongo-test-support",
-  "version": "1.2.4-rc.0",
+  "version": "1.2.4",
   "description": "Mongo Node.js Development Test Support distrary",
   "repository": {
     "type": "git",
