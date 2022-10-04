@@ -45,6 +45,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "dist/",
+    "docs/",
+    "src/",
+    "index.js"
+  ],
   "peerDependencies": {
     "mongodb": ">=3.0.0",
     "mongoose": ">=5.0.0"
