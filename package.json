@@ -35,7 +35,7 @@
     "cov": "open coverage/index.html",
     "lint": "standard --verbose 'src/**/*.js'",
     "format": "standard --fix 'src/**/*.js'",
-    "make-distribution": "run-s transpile doc lic finalize-distribution",
+    "make-distribution": "run-s transpile doc finalize-distribution",
     "finalize-distribution": "copyfiles --verbose package.json package-lock.json README.md dist",
     "doc": "jsdoc --verbose -d docs -r -c jsdoc.json -R README.md src/main",
     "prelink": "run-s make-distribution",
