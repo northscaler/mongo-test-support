@@ -11,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 16.15.0 ]
-        scope: ['@ballistagroup' ]
+        node: [ 18.18.0 ]
+        scope: ['@northscaler' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           always-auth: true
           node-version: ${{ matrix.node }}
           registry-url: 'https://registry.npmjs.org'
           scope: ${{ matrix.scope }}
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:

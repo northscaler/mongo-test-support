@@ -13,7 +13,7 @@ Your application must install its desired versions of [`mongodb`](https://www.np
 
 Usage:
 ```javascript
-const { mongoConnect } = require('@ballistagroup/mongo-test-support')
+const { mongoConnect } = require('@northscaler/mongo-test-support')
 
 const db = await mongoConnect()
 
@@ -23,13 +23,13 @@ const db = await mongoConnect()
 
 Usage to work in both local environment & CI pipeline:
 ```javascript
-const { mongoConnect } = require('@ballistagroup/mongo-test-support')
+const { mongoConnect } = require('@northscaler/mongo-test-support')
 const db = await mongoConnect(process.env.CI_COMMIT_SHA ? { host: 'mongo', port: 27017 } : undefined)
 ```
 
 You can also drop collections:
 ```javascript
-const { dropCollections } = require('@ballistagroup/mongo-test-support')
+const { dropCollections } = require('@northscaler/mongo-test-support')
 await dropCollections({db}) // drops all collections
 await dropCollections({db, names: ['foos', 'bars']}) // drops named collections
 await dropCollections({db, names: []}) // no collections dropped
